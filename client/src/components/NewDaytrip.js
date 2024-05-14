@@ -1,23 +1,26 @@
 import React, {useState} from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import {jwtDecode} from "jwt-decode";
 
 function NewDaytrip(){
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    let token;
-    let decoded;
+    const navigate = useNavigate("")
+    const [title, setTitle] = useState("");
+    const [stops, setStops] = useState("");
+    const [image, setImage] = useState("");
+    let token = localStorage.getItem("token")
 
-    const login = async (event) =>{
+
+    const createDaytrip = async (event) =>{
         event.preventDefault();
         try{
-            let user = {email, password};
-            let res = await axios.post("http://localhost:8000/user/login", user);
+            let daytrip = {title, stops, image};
+            let res = await axios.post("http://localhost:8000/daytrip/create", 
+                daytrip, 
+                {headers:{Authorization:`Bearer ${token}`}});
             console.log(res.data.msg);
-            token = res.data.token;
-            localStorage.setItem("token", token);
-
+            navigate("/daytrips");
         }catch(error){
             console.log(error)
         }
@@ -25,22 +28,29 @@ function NewDaytrip(){
     return(
         <div className="firm-container">
             <h1>NewDaytrip</h1>
-            <form className="registration-form" onSubmit={login}>
+            <form className="createDaytrip-form" onSubmit={createDaytrip}>
             <input
-                    placeholder="Email"
-                    type="email"
-                    name="email"
+                    placeholder="Title"
+                    type="title"
+                    name="title"
                     id=""
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setTitle(e.target.value)}
                 />
                 <input
-                    placeholder="Password"
-                    type="password"
-                    name="password"
+                    placeholder="Stops"
+                    type="stops"
+                    name="stops"
                     id=""
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => setStops(e.target.value)}
                 />
-                <input type="submit" value="Login" />
+                <input
+                    placeholder="Image"
+                    type="text"
+                    name="image"
+                    id=""
+                    onChange={(e) => setImage(e.target.value)}
+                />
+                <input type="submit" value="Submit" />
             </form>
         </div>
     )

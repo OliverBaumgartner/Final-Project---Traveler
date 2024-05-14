@@ -2,7 +2,7 @@ const Daytrip = require("../models/daytripModel");
 
 const getAllDaytrips = async(req,res)=>{
     try {
-        const daytrips = await Daytrip.find()
+        const daytrips = await Daytrip.find().populate("author")
         res.send(daytrips);
     } catch (error) {
         res.status(500).send({msg:"internal server error", status:false});
@@ -15,7 +15,8 @@ const createDaytrip = async(req,res)=>{     //crate Daytrips
         const data = {
             title:req.body.title,           //a string will be sent from the frontend
             imgUrl:req.body.imgUrl,         //a string will be sent from the frontend(Cloudinary later)
-            stops: req.body.stops       //an object will be sent from the frontend
+            stops: req.body.stops,      //an object will be sent from the frontend
+            author:  req.user.id
         };                                  // add country and city later
 
         const newDaytrip = await Daytrip.create(data)

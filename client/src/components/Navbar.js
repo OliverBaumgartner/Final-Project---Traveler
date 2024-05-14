@@ -19,20 +19,22 @@ function Navbar(){
         }
     }
     return(
-        <div>
+        <div> 
             <div className="logo">
-                <h1>IDO</h1>
+                <h1>TRVLR</h1>
             </div>
             <div className="links">
-                {token ? (
+                {token ? ( //if you have a token and therefore are logged in
                     <div>
-                        <Link to="/todos">Todos</Link>
-                        <Link onClick={handleLogout} to="/login">Logout</Link>
+                        <Link to="/newdaytrip">New Daytrip</Link>
+                        <Link to="/daytrips">Daytrips</Link>
+                        <Link onClick={handleLogout} to="/">Logout</Link>
                     </div>
-                ):(
+                ):( // if you don' t have a token and therefore are not logged in
                     <div>
                         <Link to="/login">Login</Link>
                         <Link to="/register">Register</Link>
+                        <Link to="/daytrips">Daytrips</Link>
                     </div>
                 )}
             </div>
