@@ -41,7 +41,7 @@ const login = async (req, res) => {
         }
 
         let token = jwt.sign(
-            {email: user.email, id: user._id},
+            {email: user.email, id: user._id, username: user.username},
             process.env.SECRET_KEY
         );
         res.send({msg: "login successfull", token});
@@ -51,4 +51,16 @@ const login = async (req, res) => {
     }
 };
 
-module.exports = {login, register};
+const saveDaytrip = async (req,res)=>{
+    try {
+        const {id} = req.params;
+        const data = req.body;
+        let updated = await User.updateOne({_id:id}, data);
+        res.status(200).send({msg:"updated successfully", status:true, updated});
+    } catch (error) {
+        console.log(error);
+        res.send({msg: "Internal server error, can not save..."});
+    }
+}
+
+module.exports = {login, register, saveDaytrip};

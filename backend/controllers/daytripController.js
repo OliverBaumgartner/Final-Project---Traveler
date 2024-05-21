@@ -14,10 +14,12 @@ const createDaytrip = async(req,res)=>{     //crate Daytrips
         console.log(req.user);
         const data = {
             title:req.body.title,           //a string will be sent from the frontend
-            imgUrl:req.body.imgUrl,         //a string will be sent from the frontend(Cloudinary later)
-            stops: req.body.stops,      //an object will be sent from the frontend
-            author:  req.user.id
-        };                                  // add country and city later
+            image: req.body.image,         //a string will be sent from the frontend(Cloudinary later)
+            stops: req.body.stops,      //an array will be sent from the frontend
+            times: req.body.times,      //an array will be sent from the frontend
+            duration: req.body.duration,     //an object will be sent from the frontend
+            author:  req.user.id       //takes id from local storage
+        };                                  
 
         const newDaytrip = await Daytrip.create(data)
         res.status(200).send({msg:"Blog created successfull", status: true, newDaytrip});
@@ -45,11 +47,14 @@ const updateDaytrip = async(req,res)=>{     //update Daytrips
         res.status(500).send({msg:"internal server error", status:false});
     }
 }
-const inspectDaytrip = async(req,res)=>{    //inspect Daytrips
+const inspectDaytrip = async(req,res)=>{    //inspect Daytrip
     try {
-        const {id} = req.params;
-        const daytrip = await Daytrip.findOne({_id:id});
-        res.send(daytrip);
+        let daytrip = await Daytrip.findOne({_id:req.params.id});
+        if (daytrip){
+            res.send(daytrip);
+        }else{
+            res.send({msg:"Blog not Found", status:false});
+        }
     } catch (error) {
         res.status(500).send({msg:"internal server error", status:false});
     }

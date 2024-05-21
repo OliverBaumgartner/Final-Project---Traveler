@@ -27,6 +27,7 @@ function Register(){
                     id=""
                     onChange={(e) => setUsername(e.target.value)}
                 />
+                <p></p>
                 <input
                     placeholder="Email"
                     type="email"
@@ -34,6 +35,7 @@ function Register(){
                     id=""
                     onChange={(e) => setEmail(e.target.value)}
                 />
+                <p></p>
                 <input
                     placeholder="Password"
                     type="password"
@@ -41,6 +43,7 @@ function Register(){
                     id=""
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                <p></p>
                 <input type="submit" value="Register" />
             </form>
         </div>

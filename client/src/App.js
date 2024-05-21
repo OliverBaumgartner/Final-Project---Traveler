@@ -5,6 +5,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NewDaytrip from "./components/NewDaytrip";
 import Navbar from "./components/Navbar";
 import Daytrips from "./components/Daytrips";
+import Inspect from "./components/Inspect";
+import Edit from "./components/Edit";
+import Owner from"./components/Owner";
 
 function App() {
   return (
@@ -16,6 +19,9 @@ function App() {
         <Route path="/register" element={<Register/>}/>
         <Route path="/newdaytrip" element={<NewDaytrip/>}/>
         <Route path="/daytrips" element={<Daytrips/>}/>
+        <Route path="/inspect/:id" element={<Inspect/>}/>
+        <Route path="/edit/:id" element={<Edit/>}/>
+        <Route path="/owner" element={<Owner/>}/>
       </Routes>
     </BrowserRouter>
   );

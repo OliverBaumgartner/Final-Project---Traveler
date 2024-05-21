@@ -7,7 +7,8 @@ const daytripSchema = new mongoose.Schema(
         author: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
         image: String,
         comments: Array,
-        Rating: String,
+        rating: String,
+        times: Array
     },{
         timestamps: true
     }
