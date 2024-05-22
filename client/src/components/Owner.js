@@ -1,3 +1,4 @@
+import { Card, CardActions, CardContent, CardMedia, Button, Typography, Container, Box } from "@mui/material";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import React, {useEffect, useState} from "react";
@@ -39,39 +40,63 @@ function Owner(){
         let res = await axios.put(`http://localhost:8000/daytrip/${id}`, updatedValue);
     }
     return(
-        <div>
+        <Container>
+            <Typography
+                variant="h3" 
+                sx={{py:4}}
+            >
+                Your Crafted Daytrips:
+            </Typography>
+            <Box sx={{display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "space-around",
+            }}>
             {daytrips.map((daytrip)=>{
                 if(daytrip.author._id === decoded.id){
                     return(
-                        <div>
-                            <h2>{daytrip.title}</h2>
-                            <img src={daytrip.image} alt=""/>
-                            <h3>{"Stops: " + daytrip.stops.length}</h3>
-                            <h3>{"Estimated Time: " + daytrip.duration}</h3>
-                            {token ? (<>
-                                <button>Save</button>
-                                <div key={daytrip._id}>
-                                    <Link to={`/inspect/${daytrip._id}`}>
-                                        <button>Inspect</button>
-                                    </Link>
-                                </div>
-                                {decoded.id === daytrip.author._id ? (<>
-                                <button onClick={() => deleteDaytrip(daytrip._id)}>delete</button>
-                                <div key={daytrip._id}>
-                                    <Link to={`/edit/${daytrip._id}`}>
-                                        <button>edit</button>
-                                    </Link>
-                                </div>
-                                
-                                </> ):null}
-                            </> ):null}
-                        </div>
+                        <Card sx={{ maxWidth: 345, m:4
+                        }}>
+                           <CardMedia
+                               sx={{ height: 140 }}
+                               image={daytrip.image}
+                           />
+                           <CardContent>
+                               <Typography gutterBottom variant="h5" component="div">
+                                   {daytrip.title}
+                               </Typography>
+                               <Typography variant="body2" color="text.secondary">
+                                   {"Stops: " + daytrip.stops.length}
+                               </Typography>
+                               <Typography variant="body2" color="text.secondary">
+                                   {"Estimated Time: " + daytrip.duration + " minutes"}
+                               </Typography>
+                           </CardContent>
+                           <CardActions sx={{display:"flex", justifyContentContent:"center"}}>
+                               {token ? (<>
+                                   <Button size="small" sx={{bgcolor:"#e8e8e8"}}>
+                                       <Link style={{ textDecoration: 'none' }} to={`/inspect/${daytrip._id}`}>
+                                           <Typography variant="h7" sx={{color: "black"}}>
+                                               Inspect
+                                           </Typography>
+                                       </Link>
+                                   </Button>
+                                   <Button size="small" sx={{bgcolor:"#e8e8e8"}}>
+                                   <Link style={{ textDecoration: 'none' }} to={`/edit/${daytrip._id}`}>
+                                       <Typography variant="h7" sx={{color: "black"}}>
+                                           Edit
+                                       </Typography>
+                                   </Link>
+                               </Button>
+                               </>):null}
+                           </CardActions>
+                       </Card>
                 )
                 }else{
                     return null;
                 }
             })}
-        </div>
+            </Box>
+        </Container>
     )
 }
 

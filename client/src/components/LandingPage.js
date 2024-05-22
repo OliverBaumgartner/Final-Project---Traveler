@@ -5,7 +5,7 @@ import Register from "../components/Register";
 import { Link, useNavigate } from "react-router-dom";
 
 import {jwtDecode} from "jwt-decode";
-import { Container, Typography } from "@mui/material";
+import { Container, Typography, Box, Button } from "@mui/material";
 
 function LandingPage(){
     let token;
@@ -18,26 +18,159 @@ function LandingPage(){
     }
 
     return(
-            <Container 
-                maxWidth="xl" 
-                sx={{
-                    bgcolor: "tomato",}}>
-                {token ? (
-                    <div>
-                        <Typography variant="h3">Hello {decoded.username}</Typography>
-                        <Typography variant="h2">this is the Landing Page</Typography>
-                        <Typography variant="h2">click 
-                            <Link to={"/daytrips"}>here</Link> 
-                            if you want to continue to all the available Daytrips
-                        </Typography>
-                        <Typography variant="h2"> or <Link to={"/newdaytrip"}>here</Link> if you want to create a new Daytrip</Typography>
-                    </div>
-                ):(
-                <Container sx={{
-                        display: 'inline-flex',
-                        justifyContent: 'space-around'
-                        }}>
-                    <Container sx={{border:1}}>
+        <Container 
+            maxWidth="xl" 
+        >
+            {token ? (
+                <Box 
+                    maxWidth="lg" 
+                    sx={{  
+                        border:0, 
+                        flexGrow:5, 
+                        p:3
+                    }}
+                >
+                    <Typography 
+                        variant="h3" 
+                        sx={{py:4}}
+                        >Welcome Back to TRVLR
+                    </Typography>
+                    <Typography 
+                        variant="h5" 
+                        fontWeight={"bold"}
+                        sx={{py:3}}
+                        >Your Gateway to Unique City Day Trips
+                    </Typography>
+                    <Typography variant="h5">
+                        Hello {decoded.username}!
+                    </Typography>
+                    <Typography variant="h5">
+                        We're thrilled to have you back. Dive into new adventures and explore user-created 
+                        day trips in the world's greatest cities. As a valued member of the TRVLR community, 
+                        you have access to personalized recommendations and can easily manage your saved trips.
+                    </Typography>
+
+                    <Typography 
+                        variant="h5" 
+                        fontWeight={"bold"}
+                        sx={{py:3}}
+                    >
+                        Explore New Day Trips
+                    </Typography>
+                    <Typography variant="h5">
+                        Discover fresh experiences designed by fellow travelers and city experts. Whether you're 
+                        revisiting your favorite city or exploring a new one, our diverse collection of day trips 
+                        ensures there's always something exciting to do.
+                    </Typography>
+
+                    <Typography 
+                        variant="h5" 
+                        fontWeight={"bold"}
+                        sx={{py:3}}
+                    >
+                        Connect with Fellow Travelers
+                    </Typography>
+                    <Typography variant="h5">
+                        Join the conversation with other TRVLR members. Share tips, ask questions, and find inspiration 
+                        from those who share your passion for travel.
+                    </Typography>
+                    <Box 
+                        sx={{
+                            display: "flex",
+                            my: 10
+                    }}>
+                        <Button 
+                            variant="outlined" 
+                            type="Button"
+                            size="large"
+                            sx={{
+                                m:1,
+                                my:3,
+                                color:"Black",
+                                borderColor:"Black",
+                                ":hover" : {borderColor: "Black"},
+                            }}
+                        >
+                            <Link  
+                                style={{ textDecoration: 'none' }} 
+                                to="/daytrips"
+                            >
+                                <Typography 
+                                    variant="h5" 
+                                    sx={{letterSpacing: '.2rem', color:"black"}}
+                                >
+                                    Browse through Daytrips
+                                </Typography>
+                            </Link>
+                        </Button>
+
+                        <Button 
+                            variant="outlined" 
+                            type="Button"
+                            size="large"
+                            sx={{
+                                m:1,
+                                my:3,
+                                color:"Black",
+                                borderColor:"Black",
+                                ":hover" : {borderColor: "Black"},
+                            }}
+                        >
+                            <Link  
+                                style={{ textDecoration: 'none' }} 
+                                to="/newdaytrip"
+                            >
+                                <Typography 
+                                    variant="h5" 
+                                    sx={{letterSpacing: '.2rem', color:"black"}}
+                                >
+                                    Create a New Daytrip
+                                </Typography>
+                            </Link>
+                        </Button>
+
+                        <Button 
+                            variant="outlined" 
+                            type="Button"
+                            size="large"
+                            sx={{
+                                m:1,
+                                my:3,
+                                color:"Black",
+                                borderColor:"Black",
+                                ":hover" : {borderColor: "Black"},
+                            }}
+                        >
+                            <Link  
+                                style={{ textDecoration: 'none' }} 
+                                to="/Owner"
+                            >
+                                <Typography 
+                                    variant="h5" 
+                                    sx={{letterSpacing: '.2rem', color:"black"}}
+                                >
+                                    Checkout your daytrips
+                                </Typography>
+                            </Link>
+                        </Button>
+                    </Box>
+                </Box>
+            ):(
+                <Box 
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'space-around',
+                        width:1
+                    }}
+                >
+                    <Box 
+                        maxWidth="xl" 
+                        sx={{  
+                            border:0, 
+                            flexGrow:5, 
+                            p:3
+                        }}
+                    >
                         <Typography 
                             variant="h3" 
                             sx={{py:4}}
@@ -102,17 +235,23 @@ function LandingPage(){
                             Whether you're planning your next adventure or looking to share your own, TRVLR is here to inspire 
                             and connect.
                         </Typography>
+                    </Box>
+                    <Box 
+                        sx={{
+                            border: 0,
+                            flexGrow:2,
+                            p:3,
+                            px:12,
+                            bgcolor: "black",
+                            display: "flex",
+                        }}
+                    >
+                        <Register/>
+                    </Box>
+                </Box>
+            )}
 
-                </Container>
-                <Container sx={{
-                    border: 1
-                }}>
-                    <Register/>
-                </Container>
-                </Container>
-                )}
-
-            </Container>
+        </Container>
     )
 }
 

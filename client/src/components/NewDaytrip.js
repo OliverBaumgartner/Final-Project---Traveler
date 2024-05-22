@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Card, CardActions, CardContent, CardMedia, Button, Typography, Container, Box, Grid, TextField } from "@mui/material";
 
 import {jwtDecode} from "jwt-decode";
 
@@ -90,7 +91,60 @@ function NewDaytrip(){
         }
     }
     return(
-        <div className="firm-container">
+        <Container className="firm-container">
+            <Card sx={{ maxWidth: "xl", m:4
+            }}>
+                <form className="createDaytrip-form" onSubmit={createDaytrip}>
+                <CardMedia
+                    sx={{ height: 400 }}
+                    image={image}
+                />
+                <TextField label="Image URL" onChange={(e) => setImage(e.target.value)}/>
+                <CardContent 
+                    sx={{ maxWidth:"xl", width: 1
+                    }}         
+                >
+                    <TextField label="Title" onChange={(e) => setTitle(e.target.value)}/>
+                    <Box sx={{display:"flex", justifyContent: "space-between"}}>
+                        <Box sx={{m:3, maxWidth:700, display: "flex", flexDirection: "column"}}>
+                            {stops.map((stop, index)=>{
+                            return(
+                                <TextField label={index +1 +". Stop"} onChange={(e) => handleStopChange(e, index)}/>
+                            )
+                            })}
+                        </Box>
+                        <Box sx={{m:3, maxWidth:700}}>
+                            {times.map((time, index)=>{
+                            return(
+                            <Box sx={{display: "flex", flexDirection: "row", flexGrow:1}}>
+                                <TextField label="estimated Time for this stop" onChange={(e) => handleTimeChange(e, index)}/>
+                                <Button size="small" sx={{bgcolor:"#e8e8e8"}} onClick={()=> removeStop(index)}>
+                                    <Typography variant="h7" sx={{color: "black"}}>
+                                        Remove Stop
+                                    </Typography>
+                                </Button>
+                            </Box>
+                            )
+                            })}
+                        </Box>
+                        
+                    </Box>
+                    <Button size="small" sx={{bgcolor:"#e8e8e8"}} onClick={()=> addStop()}>
+                            <Typography variant="h7" sx={{color: "black"}}>
+                                Add Stop
+                            </Typography>
+                        </Button>
+                </CardContent>
+                <CardActions sx={{display:"flex", justifyContentContent:"center"}}>
+                    <Button size="small" sx={{bgcolor:"#e8e8e8"}} type="Submit">
+                            <Typography variant="h7" sx={{color: "black"}}>
+                                Create Daytrip
+                            </Typography>
+                        </Button>
+                </CardActions>
+                </form>
+            </Card>
+
             <h1>NewDaytrip</h1>
             <form className="createDaytrip-form" onSubmit={createDaytrip}>
                 <input
@@ -129,7 +183,7 @@ function NewDaytrip(){
                 />
                 <input type="submit" value="Create a new Daytrip" />
             </form>
-        </div>
+        </Container>
     )
 }
 

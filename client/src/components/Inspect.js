@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, {useEffect, useState} from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { Card, CardActions, CardContent, CardMedia, Button, Typography, Container, Box, Grid } from "@mui/material";
 
 function Inspect(){
     const[daytrip, setDaytrip] = useState({});
@@ -43,31 +44,65 @@ function Inspect(){
 
     console.log(daytrip.stops)
     return(
-        <div>
-            <img src={daytrip.image} alt=""/>
-            <h1>{daytrip.title}</h1>
-            <h2>{daytrip.duration}</h2>
-            {daytrip.stops && daytrip.stops.map((stop)=>{
-                return(
-                    <div>
-                        <h2>{stop}</h2>
-                    </div>
-                )
-            })}
-            {daytrip.times && daytrip.times.map((time)=>{
-                return(
-                    <div>
-                        <h2>{time}</h2>
-                    </div>
-                )
-            })}
-
-
-            {decoded.id === daytrip.author ? (<>
-                            <button onClick={() => deleteDaytrip(daytrip._id)}>delete</button>
-                            <button onClick={()=> updateDaytrip(daytrip._id)}>edit</button>
-                            </> ):null}
-        </div>
+        <Container>
+            <Card sx={{ maxWidth: "xl", m:4
+            }}>
+                <CardMedia
+                    sx={{ height: 400 }}
+                    image={daytrip.image}
+                />
+                <CardContent 
+                    sx={{ maxWidth:"xl", width: 1
+                    }}         
+                >
+                    <Typography gutterBottom variant="h5" component="div" sx={{display: "flex", justifyContent: "center"}}>
+                        {daytrip.title}
+                    </Typography>
+                    <Box sx={{display:"flex", justifyContent: "space-between"}}>
+                        <Box sx={{m:3, maxWidth:700}}>
+                            {daytrip.stops && daytrip.stops.map((stop)=>{
+                            return(
+                                <Typography variant="body1" color="text.secondary" sx={{my:1,}}>
+                                    {stop}
+                                </Typography>
+                            )
+                            })}
+                            <Typography variant="body1" color="text.secondary" sx={{my:2, fontWeight:"bold"}}>
+                                {"Estimated Time:"}
+                            </Typography>
+                        </Box>
+                        <Box sx={{m:3, mx:6}}>
+                            {daytrip.times && daytrip.times.map((time)=>{
+                            return(
+                                <Typography variant="body1" color="text.secondary" sx={{my:1}}>
+                                    {time + " minutes"}
+                                </Typography>
+                            )
+                            })}
+                            <Typography variant="body1" color="text.secondary" sx={{my:2, fontWeight:"bold"}}>
+                                {(Math.round(daytrip.duration/60*100)/100) + " hours"}
+                            </Typography>
+                        </Box>
+                    </Box>
+                </CardContent>
+                <CardActions sx={{display:"flex", justifyContentContent:"center"}}>
+                    {decoded.id === daytrip.author ? (<>
+                        <Button size="small" sx={{bgcolor:"#e8e8e8"}} onClick={()=> updateDaytrip(daytrip._id)}>
+                            <Link style={{ textDecoration: 'none' }} to={`/Edit/${daytrip._id}`}>
+                                <Typography variant="h7" sx={{color: "black"}}>
+                                    Edit
+                                </Typography>
+                            </Link>
+                        </Button>
+                        <Button size="small" sx={{bgcolor:"#e8e8e8"}} onClick={()=> deleteDaytrip(daytrip._id)} >
+                            <Typography variant="h7" sx={{color: "black"}}>
+                                Delete
+                            </Typography>
+                        </Button>
+                    </>):null}
+                </CardActions>
+            </Card>
+        </Container>
     )
 }
 

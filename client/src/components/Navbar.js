@@ -112,20 +112,45 @@ function Navbar(){
                   >
                     {token ? ( //if you have a token and therefore are logged in
                     <div>
-                        <MenuItem key="1" onClick={handleCloseNavMenu}>
-                            <Link to="/login">Login</Link>
+                        <MenuItem key="2" onClick={handleCloseNavMenu}>
+                          <Link to="/newdaytrip" style={{ textDecoration: 'none' }} >
+                            <Typography 
+                              variant="h5" 
+                              sx={{letterSpacing: '.2rem', color:"black"}}
+                            >
+                              New Daytrip
+                            </Typography>
+                          </Link>
                         </MenuItem>
                         <MenuItem key="2" onClick={handleCloseNavMenu}>
-                            <Link to="/newdaytrip">New Daytrip</Link>
+                          <Link to="/daytrips" style={{ textDecoration: 'none' }} >
+                            <Typography 
+                              variant="h5" 
+                              sx={{letterSpacing: '.2rem', color:"black"}}
+                            >
+                              Daytrips
+                            </Typography>
+                          </Link>
                         </MenuItem>
                         <MenuItem key="2" onClick={handleCloseNavMenu}>
-                            <Link to="/daytrips">Daytrips</Link>
+                          <Link to="/Owner" style={{ textDecoration: 'none' }} >
+                            <Typography 
+                              variant="h5" 
+                              sx={{letterSpacing: '.2rem', color:"black"}}
+                            >
+                              My Daytrips
+                            </Typography>
+                          </Link>
                         </MenuItem>
                         <MenuItem key="2" onClick={handleCloseNavMenu}>
-                            <Link to="/Owner">My Daytrips</Link>
-                        </MenuItem>
-                        <MenuItem key="2" onClick={handleCloseNavMenu}>
-                            <Link onClick={handleLogout} to="/">Logout</Link>
+                          <Link style={{ textDecoration: 'none' }} onClick={handleLogout} to="/">
+                            <Typography 
+                              variant="h5" 
+                              sx={{letterSpacing: '.2rem', color:"black"}}
+                            >
+                              Logout
+                            </Typography>
+                          </Link>
                         </MenuItem>
                     </div>
                 ):( // if you don' t have a token and therefore are not logged in
@@ -143,11 +168,6 @@ function Navbar(){
                         </MenuItem>
                     </div>
                 )}
-                    {/* {pages.map((page) => (
-                      <MenuItem key={page} onClick={handleCloseNavMenu}>
-                        <Typography textAlign="center">{page}</Typography>
-                      </MenuItem>
-                    ))} */}
                   </Menu>
                 </Box>
                 <Typography
@@ -168,18 +188,6 @@ function Navbar(){
                 >
                   TRVLR
                 </Typography>
-                {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'none' } }}>
-                  {pages.map((page) => (
-                    <Button
-                      key={page}
-                      onClick={handleCloseNavMenu}
-                      sx={{ my: 2, color: 'white', display: 'block' }}
-                    >
-                      {page}
-                    </Button>
-                  ))}
-                </Box> */}
-              
                 <Box sx={{ flexGrow: 0 }}>
                 {token ? ( //if you have a token and therefore are logged in
                     <Typography
@@ -205,28 +213,6 @@ function Navbar(){
                         <Login/>
                     </Box>
                 )}
-                  <Menu
-                    sx={{ mt: '45px' }}
-                    id="menu-appbar"
-                    anchorEl={anchorElUser}
-                    anchorOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                    open={Boolean(anchorElUser)}
-                    onClose={handleCloseUserMenu}
-                  >
-                    {settings.map((setting) => (
-                      <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">{setting}</Typography>
-                      </MenuItem>
-                    ))}
-                  </Menu>
                 </Box>
               </Toolbar>
             </Container>
