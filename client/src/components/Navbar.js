@@ -63,13 +63,15 @@ function Navbar(){
         <AppBar position="static" sx={{bgcolor:"black"}}>
             <Container maxWidth="xl">
               <Toolbar disableGutters>
-                <Typography
+                {token?(
+                  <Typography
                   variant="h4"
                   noWrap
                   component="a"
-                  href="#app-bar-with-responsive-menu"
+                  href="/daytrips"
                   sx={{
                     mr: 2,
+                    my:2,
                     display: { xs: 'none', md: 'flex' },
                     fontFamily: 'monospace',
                     fontWeight: 700,
@@ -80,7 +82,24 @@ function Navbar(){
                 >
                   TRVLR
                 </Typography>
-              
+                ):(<Typography
+                  variant="h4"
+                  noWrap
+                  component="a"
+                  href="/"
+                  sx={{
+                    mr: 2,
+                    my:3,
+                    display: { xs: 'none', md: 'flex' },
+                    fontFamily: 'monospace',
+                    fontWeight: 700,
+                    letterSpacing: '.3rem',
+                    color: 'inherit',
+                    textDecoration: 'none',
+                  }}
+                >
+                  TRVLR
+                </Typography>)}
                 <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
                   <IconButton
                     size="large"
@@ -156,15 +175,12 @@ function Navbar(){
                 ):( // if you don' t have a token and therefore are not logged in
                     <div>
                         <MenuItem key="1" onClick={handleCloseNavMenu}>
-                            <Link to="/login">
-                                <Typography textAlign="center">Login</Typography>
+                            <Link style={{ textDecoration: 'none' }} to="/daytrips"> 
+                              <Typography 
+                                variant="h5" 
+                                sx={{letterSpacing: '.2rem', color:"black"}}
+                              >Daytrips</Typography>
                             </Link>
-                        </MenuItem>
-                        <MenuItem key="2" onClick={handleCloseNavMenu}>
-                            <Link to="/register">Register</Link>
-                        </MenuItem>
-                        <MenuItem key="2" onClick={handleCloseNavMenu}>
-                            <Link to="/daytrips">Daytrips</Link>
                         </MenuItem>
                     </div>
                 )}
@@ -194,7 +210,7 @@ function Navbar(){
                     variant="h5"
                     noWrap
                     component="a"
-                    href="#app-bar-with-responsive-menu"
+
                     sx={{
                       mr: 2,
                       display: { xs: 'flex', md: 'flex' },

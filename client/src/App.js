@@ -8,6 +8,7 @@ import Daytrips from "./components/Daytrips";
 import Inspect from "./components/Inspect";
 import Edit from "./components/Edit";
 import Owner from"./components/Owner";
+import Footer from "./components/Footer"
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/edit/:id" element={<Edit/>}/>
         <Route path="/owner" element={<Owner/>}/>
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 }

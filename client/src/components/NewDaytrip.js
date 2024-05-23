@@ -92,33 +92,42 @@ function NewDaytrip(){
     }
     return(
         <Container className="firm-container">
-            <Card sx={{ maxWidth: "xl", m:4
-            }}>
+            <Typography
+                variant="h3" 
+                sx={{py:4}}
+            >
+                Create a new Daytrip:
+            </Typography>
+            <Card sx={{ maxWidth: "xl", m:3}}>
                 <form className="createDaytrip-form" onSubmit={createDaytrip}>
                 <CardMedia
                     sx={{ height: 400 }}
                     image={image}
                 />
-                <TextField label="Image URL" onChange={(e) => setImage(e.target.value)}/>
+                <Box sx={{display:"flex", justifyContent: "center", p:3}}>
+                    <TextField label="Image URL" onChange={(e) => setImage(e.target.value)}/>
+                </Box>
                 <CardContent 
                     sx={{ maxWidth:"xl", width: 1
                     }}         
-                >
-                    <TextField label="Title" onChange={(e) => setTitle(e.target.value)}/>
-                    <Box sx={{display:"flex", justifyContent: "space-between"}}>
-                        <Box sx={{m:3, maxWidth:700, display: "flex", flexDirection: "column"}}>
+                >   
+                     <Box sx={{display:"flex", justifyContent: "center", p:3}}>
+                    <TextField fullWidth label="Title" sx={{pr:3}}onChange={(e) => setTitle(e.target.value)}/>
+                    </Box>
+                    <Box sx={{display:"flex", justifyContent: "space-around"}}>
+                        <Box sx={{m:3, display: "flex", flexDirection: "column"}}>
                             {stops.map((stop, index)=>{
                             return(
-                                <TextField label={index +1 +". Stop"} onChange={(e) => handleStopChange(e, index)}/>
+                                <TextField fullWidth sx={{m:1, pr:40, size:"medium"}} label={index +1 +". Stop"} onChange={(e) => handleStopChange(e, index)}/>
                             )
                             })}
                         </Box>
                         <Box sx={{m:3, maxWidth:700}}>
                             {times.map((time, index)=>{
                             return(
-                            <Box sx={{display: "flex", flexDirection: "row", flexGrow:1}}>
-                                <TextField label="estimated Time for this stop" onChange={(e) => handleTimeChange(e, index)}/>
-                                <Button size="small" sx={{bgcolor:"#e8e8e8"}} onClick={()=> removeStop(index)}>
+                            <Box sx={{display: "flex", flexDirection: "row"}}>
+                                <TextField  fullWidth sx={{m:1,}}label="estimated Time for this stop" onChange={(e) => handleTimeChange(e, index)}/>
+                                <Button size="small" sx={ {m:1, mx: 2, bgcolor:"#e8e8e8"}} onClick={()=> removeStop(index)}>
                                     <Typography variant="h7" sx={{color: "black"}}>
                                         Remove Stop
                                     </Typography>
@@ -129,13 +138,15 @@ function NewDaytrip(){
                         </Box>
                         
                     </Box>
+                    <Box sx={{display: "flex", justifyContent: "center"}}>
                     <Button size="small" sx={{bgcolor:"#e8e8e8"}} onClick={()=> addStop()}>
                             <Typography variant="h7" sx={{color: "black"}}>
                                 Add Stop
                             </Typography>
-                        </Button>
+                    </Button>
+                    </Box>
                 </CardContent>
-                <CardActions sx={{display:"flex", justifyContentContent:"center"}}>
+                <CardActions sx={{display:"flex", flexDirection: "row-reverse"}}>
                     <Button size="small" sx={{bgcolor:"#e8e8e8"}} type="Submit">
                             <Typography variant="h7" sx={{color: "black"}}>
                                 Create Daytrip
@@ -144,45 +155,6 @@ function NewDaytrip(){
                 </CardActions>
                 </form>
             </Card>
-
-            <h1>NewDaytrip</h1>
-            <form className="createDaytrip-form" onSubmit={createDaytrip}>
-                <input
-                    placeholder="title"
-                    type="text"
-                    onChange={(e) => setTitle(e.target.value)}
-                />
-                {stops.map((stop, index)=>{
-                    //Loop through the stops and render 2 inputs for each(place and time)
-                    return(
-                    <div key={index}>
-                        <input //input field for new stops
-                            placeholder={index +1 +". Stop"}
-                            type="text"
-                            onChange = {(e) => {
-                                handleStopChange(e, index);
-                            }}
-                        />
-                        <input //input field for the corresponding times
-                            placeholder={"estimated Time for this stop"}
-                            type="text"
-                            onChange = {(e) => {
-                                handleTimeChange(e,index)
-                            }}
-                        />
-                        <button type="button" onClick={() => removeStop(index)}>  
-                        Remove Stop 
-                        </button>
-                    </div>)
-                })}
-                <button type="button" onClick={() => addStop()}>addStop</button>
-                <input
-                    placeholder="imgURL"
-                    type="text"
-                    onChange={(e) => setImage(e.target.value)}
-                />
-                <input type="submit" value="Create a new Daytrip" />
-            </form>
         </Container>
     )
 }

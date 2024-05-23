@@ -5,7 +5,7 @@ import Register from "../components/Register";
 import { Link, useNavigate } from "react-router-dom";
 
 import {jwtDecode} from "jwt-decode";
-import { Container, Typography, Box, Button } from "@mui/material";
+import { Container, Typography, Box, Button, Paper, Item } from "@mui/material";
 
 function LandingPage(){
     let token;
@@ -32,52 +32,22 @@ function LandingPage(){
                 >
                     <Typography 
                         variant="h3" 
-                        sx={{py:4}}
+                        sx={{py:4, mb:20}}
                         >Welcome Back to TRVLR
                     </Typography>
-                    <Typography 
-                        variant="h5" 
-                        fontWeight={"bold"}
-                        sx={{py:3}}
-                        >Your Gateway to Unique City Day Trips
-                    </Typography>
-                    <Typography variant="h5">
+
+                    <Typography variant="h5" sx={{mb:5}}>
                         Hello {decoded.username}!
                     </Typography>
-                    <Typography variant="h5">
-                        We're thrilled to have you back. Dive into new adventures and explore user-created 
-                        day trips in the world's greatest cities. As a valued member of the TRVLR community, 
-                        you have access to personalized recommendations and can easily manage your saved trips.
+                    <Typography variant="h5" sx={{mb:20}}>
+                        What's your next move?
                     </Typography>
 
-                    <Typography 
-                        variant="h5" 
-                        fontWeight={"bold"}
-                        sx={{py:3}}
-                    >
-                        Explore New Day Trips
-                    </Typography>
-                    <Typography variant="h5">
-                        Discover fresh experiences designed by fellow travelers and city experts. Whether you're 
-                        revisiting your favorite city or exploring a new one, our diverse collection of day trips 
-                        ensures there's always something exciting to do.
-                    </Typography>
-
-                    <Typography 
-                        variant="h5" 
-                        fontWeight={"bold"}
-                        sx={{py:3}}
-                    >
-                        Connect with Fellow Travelers
-                    </Typography>
-                    <Typography variant="h5">
-                        Join the conversation with other TRVLR members. Share tips, ask questions, and find inspiration 
-                        from those who share your passion for travel.
-                    </Typography>
                     <Box 
                         sx={{
                             display: "flex",
-                            my: 10
+                            my: 10,
+                            mb:33.5
                     }}>
                         <Button 
                             variant="outlined" 
@@ -189,47 +159,81 @@ function LandingPage(){
                             something for everyone.
                         </Typography>
 
-
+                        <Box sx={{display:"flex", justifyContent:"center"}}>
                         <Typography 
                             variant="h4" 
-                            sx={{py:3}}>What Makes TRVLR Special?</Typography>
-                        <Typography variant="h5"sx={{py:1}}>
-                            <Typography variant="h5" fontWeight={"bold"}> - User-Created Day Trips:</Typography>
-                            Our trips are designed by users who know their cities inside out. Get authentic 
-                            experiences crafted by people who share your passion for exploration.
-                        </Typography>
-                        <Typography variant="h5"sx={{py:1}}>
-                            <Typography variant="h5" fontWeight={"bold"}> - Community Driven:</Typography>
-                            Connect with a community of like-minded travelers. Browse, save, and share day 
-                            trips directly from your dashboard.
-                        </Typography>
-                        <Typography variant="h5"sx={{py:1}}>
-                            <Typography variant="h5" fontWeight={"bold"}> - Completely Free:</Typography>
-                            All our resources are free to use. Get inspired by day trips without any booking fees or hidden costs.
-                        </Typography>
-                        <Typography variant="h5"sx={{py:1}}>
-                            <Typography variant="h5" fontWeight={"bold"}> - Ratings & Reviews:</Typography>
-                            Soon, you'll be able to read reviews and ratings from fellow travelers, 
-                            helping you choose the best experiences.
-                        </Typography>
-
-
-                        <Typography variant="h4" sx={{py:3}}>How It Works</Typography>
-                        <Typography variant="h5" sx={{py:1}}>
-                            <Typography variant="h5" fontWeight={"bold"}> - Explore:</Typography>
-                            Browse through a wide range of user-created day trips tailored for solo travelers and couples.
-                        </Typography>
-                        <Typography variant="h5" sx={{py:1}}>
-                            <Typography variant="h5" fontWeight={"bold"}> - Save:</Typography>
-                            Found something you like? Save day trips to your personal dashboard for easy access.
-                        </Typography>
-                        <Typography variant="h5" sx={{py:1}}>
-                            <Typography variant="h5" fontWeight={"bold"}> - Share:</Typography>
-                            Once you've enjoyed a trip, share your experience and help others by leaving ratings and comments.
-                        </Typography>
-
-
-                        <Typography variant="h4" sx={{py:3}}>Join the TRVLR Community Today</Typography>
+                            sx={{py:5, mt:5}}>What Makes TRVLR Special?</Typography>
+                        </Box>
+                        <Box sx={{display: "flex", flexDirection:"column", alignItems:"center"}}>
+                            <Paper elevation="3" sx={{m:1, p:2, maxWidth:"sm"}}>
+                                <Box sx={{display: "flex", justifyContent:"center", py:2}}>
+                                    <Typography variant="h5" fontWeight={"bold"}>User-Created Day Trips</Typography>
+                                </Box>
+                                <Typography variant="h5"sx={{py:1}}>
+                                    Our trips are designed by users who know their cities inside out. Get authentic 
+                                    experiences crafted by people who share your passion for exploration.
+                                </Typography>
+                            </Paper>
+                            <Paper elevation="3" sx={{m:1, p:2, maxWidth:"sm"}}>
+                                <Box sx={{display: "flex", justifyContent:"center", py:2}}>
+                                    <Typography variant="h5" fontWeight={"bold"}>Community Driven</Typography>
+                                </Box>
+                                <Typography variant="h5"sx={{py:1}}>
+                                    Connect with a community of like-minded travelers. Browse, save, and share day 
+                                    trips directly from your dashboard.
+                                </Typography>
+                            </Paper>
+                            <Paper elevation="3" sx={{m:1, p:2, maxWidth:"sm"}}>
+                                <Box sx={{display: "flex", justifyContent:"center", py:2}}>
+                                    <Typography variant="h5" fontWeight={"bold"}>Completely Free</Typography>
+                                </Box>
+                                <Typography variant="h5"sx={{py:1}}>
+                                    All our resources are free to use. Get inspired by day trips without any booking fees or hidden costs.
+                                </Typography>
+                            </Paper>
+                            <Paper elevation="3" sx={{m:1, p:2, maxWidth:"sm"}}>
+                                <Box sx={{display: "flex", justifyContent:"center", py:2}}>
+                                    <Typography variant="h5" fontWeight={"bold"}>Ratings & Reviews</Typography>
+                                </Box>
+                                <Typography variant="h5"sx={{py:1}}>
+                                    Soon, you'll be able to read reviews and ratings from fellow travelers, 
+                                    helping you choose the best experiences.
+                                </Typography>
+                            </Paper>
+                        </Box>
+                        <Box sx={{display:"flex", justifyContent:"center"}}>
+                        <Typography variant="h4" sx={{py:3, mt:5}}>How It Works</Typography>
+                        </Box>
+                        
+                        <Box sx={{display: "flex", flexDirection:"row"}}>
+                            <Paper elevation="3" sx={{m:1, p:2}}>
+                                <Box sx={{display: "flex", justifyContent:"center", py:2}}>
+                                    <Typography variant="h5" fontWeight={"bold"}>Explore</Typography>
+                                </Box>
+                                <Typography variant="h5" sx={{py:1}}>
+                                    Browse through a wide range of user-created day trips tailored for solo travelers and couples.
+                                </Typography>
+                            </Paper>
+                            <Paper elevation="3" sx={{m:1, p:2, px:5}}>
+                                <Box sx={{display: "flex", justifyContent:"center", py:2}}>
+                                    <Typography variant="h5" fontWeight={"bold"}>Save</Typography>
+                                </Box>
+                                <Typography variant="h5" sx={{py:1}}>
+                                    Found something you like? Save day trips to your personal dashboard for easy access.
+                                </Typography>
+                            </Paper>
+                            <Paper elevation="3" sx={{m:1, p:2, px:5}}>
+                                <Box sx={{display: "flex", justifyContent:"center", py:2}}>
+                                    <Typography variant="h5" fontWeight={"bold"}>Share</Typography>
+                                </Box>
+                                <Typography variant="h5" sx={{py:1}}>
+                                    Once you've enjoyed a trip, share your experience and help others by leaving ratings and comments.
+                                </Typography>
+                            </Paper>
+                        </Box>
+                        <Box sx={{display:"flex", justifyContent:"center"}}>
+                        <Typography variant="h4" sx={{py:3, mt:5}}>Join the TRVLR Community Today</Typography>
+                        </Box>
                         <Typography variant="h5">
                             Dive into the best experiences the world's biggest cities have to offer. 
                             Whether you're planning your next adventure or looking to share your own, TRVLR is here to inspire 

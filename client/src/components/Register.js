@@ -1,19 +1,23 @@
 import React, {useState} from "react";
 import axios from "axios";
 import { TextField, Box, Typography, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function Register(){
+    const navigate = useNavigate
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    let token;
+    let decoded;
 
     const register = async (event) =>{
         event.preventDefault();
         try{
             let user = {username, email, password};
             let res = await axios.post("http://localhost:8000/user/register", user);
-            console.log("regisered successfully")
-            console.log(res.data);
+            alert("regisered successfully, Please Log in")
         } catch(error){}
     };
 
@@ -29,23 +33,23 @@ function Register(){
                 p:5
             }}
         >
-            <Typography 
-                variant="h4"
-                noWrap
-                component="a"
-                sx={{
-                    m: 2,
-                    display: { xs: 'none', md: 'flex' },
-                    fontFamily: 'monospace',
-                    fontWeight: 700,
-                    letterSpacing: '.2rem',
-                    color: 'white',
-                    textDecoration: 'none',
-                }}
-            >
-                Register
-            </Typography>
-            <form onSubmit={register} className="registration-form">
+          <Typography 
+              variant="h4"
+              noWrap
+              component="a"
+              sx={{
+                  m: 2,
+                  display: { xs: 'none', md: 'flex' },
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.2rem',
+                  color: 'white',
+                  textDecoration: 'none',
+              }}
+          >
+            Register
+          </Typography>
+          <form onSubmit={register} className="registration-form">
             <TextField 
                 id="outlined-basic" 
                 label="Username" 
@@ -80,10 +84,10 @@ function Register(){
                         "&.Mui-focused": {
                           color: "white",
                           fontWeight: "bold",
-                        },
                       },
                     },
-                }}
+                  },
+              }}
             />
             <TextField 
                 id="outlined-basic" 
@@ -119,10 +123,10 @@ function Register(){
                         "&.Mui-focused": {
                           color: "white",
                           fontWeight: "bold",
-                        },
                       },
                     },
-                }}
+                  },
+              }}
             />
             <TextField 
                 id="outlined-basic" 
@@ -163,7 +167,7 @@ function Register(){
                     },
                 }}
             />
-
+            <Box sx={{display: "flex", justifyContent: "center"}}>
             <Button 
                 variant="outlined" 
                 type="submit"
@@ -177,6 +181,7 @@ function Register(){
             >
                 Register 
             </Button>
+            </Box>
             </form>
         </Box>
     )

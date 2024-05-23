@@ -75,7 +75,7 @@ function Daytrips(){
                                 <Button size="small" sx={{bgcolor:"#e8e8e8"}}>
                                     <Link style={{ textDecoration: 'none' }} to={`/inspect/${daytrip._id}`}>
                                         <Typography variant="h7" sx={{color: "black"}}>
-                                            Inspect
+                                            Explore
                                         </Typography>
                                     </Link>
                                 </Button>

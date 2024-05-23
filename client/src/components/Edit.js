@@ -2,6 +2,7 @@ import axios from "axios";
 import React, {useEffect, useState} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { Card, CardActions, CardContent, CardMedia, Button, Typography, Container, Box, Grid, TextField } from "@mui/material";
 
 function Edit(){
     const navigate = useNavigate("")
@@ -119,50 +120,86 @@ function Edit(){
         }
     }
     return(
-        <div className="firm-container">
-            <h1>NewDaytrip</h1>
-            <form className="updateDaytrip-form" onSubmit={updateDaytrip}>
-                <input
-                    placeholder="title"
-                    type="text"
-                    onChange={(e) => setTitle(e.target.value)}
-                    value={title}
+        <Container className="firm-container">
+            <Typography
+                variant="h3" 
+                sx={{py:4}}
+            >
+                Update your Daytrip:
+            </Typography>
+            <Card sx={{ maxWidth: "xl", m:3}}>
+                <form className="updateDaytrip-form" onSubmit={updateDaytrip}>
+                <CardMedia
+                    sx={{ height: 400 }}
+                    image={image}
                 />
-                {stops.map((stop, index)=>{
-                    //Loop through the stops and render 2 inputs for each(place and time)
-                    return(
-                    <div key={index}>
-                        <input //input field for new stops
-                            placeholder={index +1 +". Stop"}
-                            type="text"
-                            onChange = {(e) => {
-                                handleStopChange(e, index);
-                            }}
-                            value={stops[index]}
-                        />
-                        <input //input field for the corresponding times
-                            placeholder={"estimated Time for this stop"}
-                            type="text"
-                            onChange = {(e) => {
-                                handleTimeChange(e,index)
-                            }}
-                            value={times[index]}
-                        />
-                        <button type="button" onClick={() => removeStop(index)}>  
-                        Remove Stop 
-                        </button>
-                    </div>)
-                })}
-                <button type="button" onClick={() => addStop()}>addStop</button>
-                <input
-                    placeholder="imgURL"
-                    type="text"
-                    onChange={(e) => setImage(e.target.value)}
-                    value={image}
-                />
-                <input type="submit" value="Update Daytrip" />
-            </form>
-        </div>
+                <Box sx={{display:"flex", justifyContent: "center", p:3}}>
+                    <TextField onChange={(e) => setImage(e.target.value)} value={image}/>
+                </Box>
+                <CardContent 
+                    sx={{ maxWidth:"xl", width: 1
+                    }}         
+                >   
+                     <Box sx={{display:"flex", justifyContent: "center", p:3}}>
+                    <TextField 
+                        fullWidth 
+                        sx={{pr:3}}onChange={(e) => setTitle(e.target.value)} 
+                        value={title}/>
+                    </Box>
+                    <Box sx={{display:"flex", justifyContent: "space-around"}}>
+                        <Box sx={{m:3, display: "flex", flexDirection: "column"}}>
+                            {stops.map((stop, index)=>{
+                            return(
+                                <TextField 
+                                    fullWidth 
+                                    sx={{m:1, pr:40, size:"medium"}} 
+                                    
+                                    onChange={(e) => handleStopChange(e, index)}
+                                    value={stops[index]}
+                                />
+                            )
+                            })}
+                        </Box>
+                        <Box sx={{m:3, maxWidth:700}}>
+                            {times.map((time, index)=>{
+                            return(
+                            <Box sx={{display: "flex", flexDirection: "row"}}>
+                                <TextField  
+                                    fullWidth 
+                                    sx={{m:1,}}
+                                    placeholder="estimated Time for this stop" 
+                                    onChange={(e) => handleTimeChange(e, index)}
+                                    value={times[index]}
+                                />
+                                <Button size="small" sx={ {m:1, mx: 2, bgcolor:"#e8e8e8"}} onClick={()=> removeStop(index)}>
+                                    <Typography variant="h7" sx={{color: "black"}}>
+                                        Remove Stop
+                                    </Typography>
+                                </Button>
+                            </Box>
+                            )
+                            })}
+                        </Box>
+                        
+                    </Box>
+                    <Box sx={{display: "flex", justifyContent: "center"}}>
+                    <Button size="small" sx={{bgcolor:"#e8e8e8"}} onClick={()=> addStop()}>
+                            <Typography variant="h7" sx={{color: "black"}}>
+                                Add Stop
+                            </Typography>
+                    </Button>
+                    </Box>
+                </CardContent>
+                <CardActions sx={{display:"flex", flexDirection: "row-reverse"}}>
+                    <Button size="small" sx={{bgcolor:"#e8e8e8"}} type="Submit">
+                            <Typography variant="h7" sx={{color: "black"}}>
+                                Update Daytrip
+                            </Typography>
+                        </Button>
+                </CardActions>
+                </form>
+            </Card>
+        </Container>
     )
 }
 
