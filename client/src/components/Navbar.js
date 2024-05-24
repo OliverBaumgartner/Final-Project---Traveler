@@ -46,14 +46,13 @@ function Navbar(){
     if(localStorage.getItem("token")){
         token = localStorage.getItem("token")
         decoded = jwtDecode(token);
-        console.log(decoded);
     }
 
     function handleLogout(){
         if(token){
             if(window.confirm("Are you sure you want to logout?")){
                 localStorage.removeItem("token");
-                console.log("logout successfull")
+                alert("logout successfull")
             }
         }else {
             navigate ("/");

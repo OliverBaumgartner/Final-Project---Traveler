@@ -16,17 +16,10 @@ function NewDaytrip(){
 
     useEffect(()=>{
         let sum = 0;
-        //console.log("initial sum " + sum)
-        console.log("initial times" + times)
         for (let i = 0; i<times.length; i++){
             sum += Number(times[i]);
-            console.log("times" + times[i])
-            console.log("sum: " + sum)
         }
-        //let sum = times.reduce((acc,value)=>acc + Number(value), 0)
-        console.log("right before declaring duration:" + sum)
         setDuration(sum.toString());
-        console.log("duration " + duration)
     },[times])
 
 
@@ -38,7 +31,7 @@ function NewDaytrip(){
             let res = await axios.post("http://localhost:8000/daytrip/create", 
                 daytrip, 
                 {headers:{Authorization:`Bearer ${token}`}});
-            console.log(res.data.msg);
+           alert(res.data.msg);
             navigate("/daytrips");
         }catch(error){
             console.log(error)
@@ -60,7 +53,7 @@ function NewDaytrip(){
             const stopsArray = [...stops];
             stopsArray[index] = value;
             setStops(stopsArray);
-            //console.log(stops)
+
         } catch (error) {
             console.log(error)
         }
@@ -72,7 +65,6 @@ function NewDaytrip(){
             const timesArray = [...times];
             timesArray[index] = value;
             setTimes(timesArray);
-            //console.log("times from handleTimeChange" + times);
         } catch (error) {
             console.log(error)
         }

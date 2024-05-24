@@ -11,12 +11,10 @@ function Owner(){
     token = localStorage.getItem("token")
     if(token){
         decoded = jwtDecode(token)
-        console.log(decoded)
     }
 
     const getAllDaytrips = async() => {
         let res = await axios.get("http://localhost:8000/daytrip");
-        console.log(res.data)
         setDaytrips(res.data);
     };
     useEffect(() => {
@@ -40,7 +38,7 @@ function Owner(){
         let res = await axios.put(`http://localhost:8000/daytrip/${id}`, updatedValue);
     }
     return(
-        <Container>
+        <Container sx={{minHeight:783}}>
             <Typography
                 variant="h3" 
                 sx={{py:4}}

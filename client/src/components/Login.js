@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 import {jwtDecode} from "jwt-decode";
-import { TextField, Box, Typography, Button } from "@mui/material";
+import { TextField, Box, Typography, Button, AlertTitle, Alert } from "@mui/material";
 
 function Login(){
     const navigate = useNavigate("")
@@ -17,12 +17,12 @@ function Login(){
         try{
             let user = {email, password};
             let res = await axios.post("http://localhost:8000/user/login", user);
-            console.log(res.data.msg);
+            alert(res.data.msg);
             token = res.data.token;
             localStorage.setItem("token", token);
             navigate("/");
         }catch(error){
-            console.log(error)
+            alert(error.response.data.msg)
         }
     }
     return(

@@ -17,7 +17,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import { Paper } from "@mui/material";
+import { Alert, Paper } from "@mui/material";
 
 const pages = ['Products', 'Pricing', 'Blog', "housing"];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -47,14 +47,13 @@ function Footer(){
     if(localStorage.getItem("token")){
         token = localStorage.getItem("token")
         decoded = jwtDecode(token);
-        console.log(decoded);
     }
 
     function handleLogout(){
         if(token){
             if(window.confirm("Are you sure you want to logout?")){
                 localStorage.removeItem("token");
-                console.log("logout successfull")
+                Alert("logout successfull")
             }
         }else {
             navigate ("/");

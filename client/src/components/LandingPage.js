@@ -14,7 +14,6 @@ function LandingPage(){
     if(localStorage.getItem("token")){
         token = localStorage.getItem("token")
         decoded = jwtDecode(token);
-        console.log(decoded);
     }
 
     return(

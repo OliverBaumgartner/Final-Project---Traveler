@@ -11,12 +11,10 @@ function Daytrips(){
     token = localStorage.getItem("token")
     if(token){
         decoded = jwtDecode(token)
-        console.log(decoded)
     }
 
     const getAllDaytrips = async() => {
         let res = await axios.get("http://localhost:8000/daytrip");
-        console.log(res.data)
         setDaytrips(res.data);
     };
     useEffect(() => {
@@ -79,13 +77,15 @@ function Daytrips(){
                                         </Typography>
                                     </Link>
                                 </Button>
-                                <Button size="small" sx={{bgcolor:"#e8e8e8"}}>
-                                <Link style={{ textDecoration: 'none' }} to={`/edit/${daytrip._id}`}>
-                                    <Typography variant="h7" sx={{color: "black"}}>
-                                        Edit
-                                    </Typography>
-                                </Link>
-                            </Button>
+                                {daytrip.author._id === decoded.id ?(
+                                    <Button size="small" sx={{bgcolor:"#e8e8e8"}}>
+                                    <Link style={{ textDecoration: 'none' }} to={`/edit/${daytrip._id}`}>
+                                        <Typography variant="h7" sx={{color: "black"}}>
+                                            Edit
+                                        </Typography>
+                                    </Link>
+                                    </Button>
+                                ):null}
                             </>):null}
                         </CardActions>
                     </Card>

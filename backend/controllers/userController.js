@@ -29,13 +29,13 @@ const login = async (req, res) => {
         }
         let user = await User.findOne({ email});
         if (!user){
-            return res.send({
-                msg: "user not found, please check the Emailadress",
+            return res.status(401).send({
+                msg: "user not found, please check the Email adress",
             });
         }
         let isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid){
-            return res.send({
+            return res.status(401).send({
                 msg: "Invalid or wrong password",
             });
         }
@@ -44,10 +44,10 @@ const login = async (req, res) => {
             {email: user.email, id: user._id, username: user.username},
             process.env.SECRET_KEY
         );
-        res.send({msg: "login successfull", token});
+        res.status(200).send({msg: "login successfull", token});
     } catch (error){
         console.log(error);
-        res.send({msg: "Internal server error, can not login..."});
+        res.status(500).send({msg: "Internal server error, can not login..."});
     }
 };
 

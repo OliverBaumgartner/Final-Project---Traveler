@@ -24,7 +24,6 @@ function Edit(){
     useEffect(()=>{
         async function getDaytrip(){
             let res = await axios.get(`http://localhost:8000/daytrip/${id}`)
-            console.log(res)
             if (res.status===200){
                 setDaytrip(res.data);
                 setTitle(res.data.title)
@@ -38,25 +37,12 @@ function Edit(){
         getDaytrip();
     }, [])
 
-    //updating a daytrip:
-    // async function updateDaytrip(id){
-    //     let updatedValue = {};
-    //     let res = await axios.put(`http://localhost:8000/daytrip/${id}`, updatedValue);
-    // }
-
     useEffect(()=>{
         let sum = 0;
-        //console.log("initial sum " + sum)
-        console.log("initial times" + times)
         for (let i = 0; i<times.length; i++){
             sum += Number(times[i]);
-            console.log("times" + times[i])
-            console.log("sum: " + sum)
         }
-        //let sum = times.reduce((acc,value)=>acc + Number(value), 0)
-        console.log("right before declaring duration:" + sum)
         setDuration(sum.toString());
-        console.log("duration " + duration)
     },[times])
     
     const updateDaytrip = async (event) =>{
@@ -67,7 +53,6 @@ function Edit(){
             let res = await axios.put(`http://localhost:8000/daytrip/${id}`, 
                 data, 
                 {headers:{Authorization:`Bearer ${token}`}});
-            console.log(res.data.msg);
             navigate("/daytrips");
         }catch(error){
             console.log(error)
@@ -89,7 +74,6 @@ function Edit(){
             const stopsArray = [...stops];
             stopsArray[index] = value;
             setStops(stopsArray);
-            //console.log(stops)
         } catch (error) {
             console.log(error)
         }
@@ -101,7 +85,6 @@ function Edit(){
             const timesArray = [...times];
             timesArray[index] = value;
             setTimes(timesArray);
-            //console.log("times from handleTimeChange" + times);
         } catch (error) {
             console.log(error)
         }

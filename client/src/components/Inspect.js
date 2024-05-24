@@ -7,7 +7,6 @@ import { Card, CardActions, CardContent, CardMedia, Button, Typography, Containe
 function Inspect(){
     const[daytrip, setDaytrip] = useState({});
     const {id} = useParams();
-    //console.log(id);
     let decoded
     let token
     const navigate = useNavigate("")
@@ -19,7 +18,6 @@ function Inspect(){
     useEffect(()=>{
         async function inspectDaytrip(){
             let res = await axios.get(`http://localhost:8000/daytrip/${id}`)
-            console.log(res)
             if (res.status===200){
                 setDaytrip(res.data);
             }else{
@@ -42,7 +40,6 @@ function Inspect(){
         let res = await axios.put(`http://localhost:8000/daytrip/${id}`, updatedValue);
     }
 
-    console.log(daytrip.stops)
     return(
         <Container>
             <Card sx={{ maxWidth: "xl", m:4
