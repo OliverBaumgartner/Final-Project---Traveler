@@ -22,7 +22,7 @@ const createDaytrip = async(req,res)=>{     //crate Daytrips
         };                                  
 
         const newDaytrip = await Daytrip.create(data)
-        res.status(200).send({msg:"Blog created successfull", status: true, newDaytrip});
+        res.status(200).send({msg:"Daytrip created successfull", status: true, newDaytrip});
     } catch (error) {
         res.status(500).send({msg:"internal server error", status:false});
     }
